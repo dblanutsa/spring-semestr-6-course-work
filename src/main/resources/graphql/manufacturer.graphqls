@@ -1,0 +1,1 @@
+type Manufacturer {    id: ID!    name: String!    description: String!}schema {    query: ManufacturerQueries,}type ManufacturerQueries {    getList: [Manufacturer]}
