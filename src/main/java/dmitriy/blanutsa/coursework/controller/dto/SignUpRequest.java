@@ -15,15 +15,13 @@ public class SignUpRequest {
 
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z0-9_]{6,20}$")
+    private String login;
+
+    @Size(max = 20)
     private String firstName;
 
-    @NotBlank
     @Size(max = 20)
     private String lastName;
-
-    @NotBlank
-    @Size(max = 20)
-    private String login;
 
     @NotBlank
     @Email

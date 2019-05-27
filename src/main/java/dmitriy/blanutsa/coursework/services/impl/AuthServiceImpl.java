@@ -87,20 +87,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     @Transactional
-    public void resetPassword(UserPrincipal userPrincipal, ResetPasswordRequest resetPasswordRequest) {
-        if (passwordEncoder.matches(resetPasswordRequest.getOldPassword(), userPrincipal.getPassword())) {
-            Optional<User> userOptional = userRepository.findById(userPrincipal.getId());
-            userOptional.orElseThrow(() -> new AppException("user not found"));
-            User user = userOptional.get();
-
-            user.setPassword(passwordEncoder.encode(resetPasswordRequest.getNewPassword()));
-        } else {
-            throw new AppException("old password is wrong");
-        }
-    }
-
-    @Override
-    @Transactional
     public boolean checkLoginUnique(String login) {
         return !userRepository.existsByLogin(login);
     }

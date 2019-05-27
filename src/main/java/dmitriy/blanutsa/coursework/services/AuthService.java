@@ -13,8 +13,6 @@ public interface AuthService {
 
     TokenResponse signin(LoginRequest loginRequest);
 
-    void resetPassword(UserPrincipal userPrincipal, ResetPasswordRequest resetPasswordRequest);
-
     boolean checkLoginUnique(String login);
 
     boolean checkEmailUnique(String email);

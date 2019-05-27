@@ -5,6 +5,7 @@ import dmitriy.blanutsa.coursework.security.UserPrincipal;
 import dmitriy.blanutsa.coursework.services.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,7 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -31,19 +32,12 @@ public class AuthController {
         return authService.signup(signUpRequest);
     }
 
-    @PostMapping("/resetPassword")
-    @ResponseStatus(HttpStatus.OK)
-    public void resetPassword(@AuthenticationPrincipal UserPrincipal currentUser,
-                                           @Valid @RequestBody ResetPasswordRequest resetPasswordRequest) {
-        authService.resetPassword(currentUser, resetPasswordRequest);
-    }
-
-    @GetMapping("/checkLoginUnique")
+    @GetMapping("/checkLogin")
     public ApiResponse checkLoginUnique(@RequestParam(value = "login") String login) {
         return new ApiResponse(authService.checkLoginUnique(login));
     }
 
-    @GetMapping("/checkEmailUnique")
+    @GetMapping("/checkEmail")
     public ApiResponse checkEmailUnique(@RequestParam(value = "email") String email) {
         return new ApiResponse(authService.checkEmailUnique(email));
     }
